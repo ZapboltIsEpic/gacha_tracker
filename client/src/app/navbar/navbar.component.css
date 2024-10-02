@@ -1,0 +1,10 @@
+/* navbar.component.css */
+
+.navbar {
+    background-color: black;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px; /* Adjust the padding as needed */
+}
