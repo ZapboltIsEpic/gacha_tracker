@@ -20,5 +20,5 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   title = 'Gacha Tracker';
-  games = [{id: 0, name: 'genshin-impact'}, {id: 1, name: 'arknights'}];
+  games = [{id: 0, name: 'genshin-impact'}, {id: 1, name: 'arknights'}, {id: 2, name: 'fgo'}];
 }
