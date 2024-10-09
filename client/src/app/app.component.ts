@@ -25,6 +25,14 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 })
 export class AppComponent {
   title = 'Gacha Tracker';
-  games = [{id: 0, name: 'genshin-impact'}, {id: 1, name: 'arknights'}, {id: 2, name: 'fgo'}];
+  games = [
+    {id: 0, name: 'genshin impact'}, 
+    {id: 1, name: 'zenless zone zero'}, 
+    {id: 2, name: 'fate grand order'}, 
+    {id: 3, name: 'honkai-star-rail'}, 
+    {id: 4, name: 'dragon ball dokkan battle'}, 
+    {id: 5, name: 'nikke goddess of victory'},
+    {id: 6, name: 'azur lane'},
+  ];
   @ViewChild('sidenav') sidenav!: MatSidenav;
 }
