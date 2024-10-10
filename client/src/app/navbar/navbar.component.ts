@@ -12,17 +12,22 @@ import { MatSidenav } from '@angular/material/sidenav';
   imports: [MatToolbarModule, SearchbarComponent, MatButtonModule, MatIconModule, MatSidenav],
   template: `
     <mat-toolbar [class] = "navbar">
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Gacha Tracker</span>
-      <app-searchbar [class] = "searchbar"></app-searchbar>
-      <button mat-button>Sign In</button>
+      <div [class] = "titleandlogo">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon [class] = "menuicon">menu</mat-icon>
+        </button>
+        <span>Gacha Tracker</span>
+      </div>
+      <app-searchbar></app-searchbar>
+      <button mat-button [id]="signinbutton">Sign In</button>
     </mat-toolbar>
   `,
   styleUrls: ['navbar.component.css', 'searchbar/searchbar.component.css']
 })
 export class NavbarComponent {
+  signinbutton = 'signinbutton';
+  menuicon = 'menuicon';
+  titleandlogo = 'titleandlogo';
   navbar = 'navbar';
   searchbar = 'searchbar';
   @Input() sidenav!: MatSidenav;

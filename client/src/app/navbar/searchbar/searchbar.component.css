@@ -1,9 +1,32 @@
 .searchbar {
-    background-color: grey;
+    background-color: #121212;
     overflow: hidden;
     color: white;
     padding: 10px;
     display: flex;
     align-items: center;
-    
+    justify-content: center;
+    width: 100%; /* Ensure the searchbar takes full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.searchbox {
+    text-align: left;
+    padding-left: 10px; /* Adjust the value as needed to move the text slightly away from the left edge */
+    background-color: #121212;
+    color: #d8d8d8;
+    border-radius: 40px 0 0 40px;
+    width: 100%; /* Ensure the searchbox takes full width */
+    max-width: 468px; /* Set a maximum width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    height: 40px;
+}
+
+#searchbutton {
+    background-color: #222222;
+    align-items: center;
+    border-radius: 0 40px 40px 0;
+    height: 40px;
+    width: 64px;
+    color: #8f8f8f;
 }
