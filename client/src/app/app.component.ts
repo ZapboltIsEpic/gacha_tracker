@@ -14,7 +14,6 @@ import { HomepageComponent } from './homepage/homepage.component';
       <app-sidebar></app-sidebar>
     </mat-sidenav>
     <app-navbar [sidenav]="sidenav"></app-navbar>
-    <app-homepage></app-homepage>
     <router-outlet />
   `,
   styles: [],
