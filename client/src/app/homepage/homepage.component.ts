@@ -1,19 +1,24 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { Games } from '../shared/models/games';
+import { GamesService } from '../services/games.service';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule],
   template: `
     <div class="homepage">
       <h1>Welcome to {{title}}!</h1>
       <span>
-        @for (game of games; track game.id) {
-          <div >
-          {{game.name}}
-          <img [src]="game.image" alt="{{game.name}}" width="200">
-          </div>
-        }
+        <ul>
+          <li *ngFor="let game of games">
+            <a routerLink = "/game/{{game.id}}"></a>
+            {{game.name}}
+            <img [src]="game.image" width="100" height="100">
+          </li>
+        </ul>
       </span>
     </div>
   `,
@@ -21,13 +26,9 @@ import { Component } from '@angular/core';
 })
 export class HomepageComponent {
   title = 'Gacha Tracker';
-  games = [
-    { id: 0, name: 'genshin impact', image: 'assets/genshin-impact.jpg' },
-    { id: 1, name: 'zenless zone zero', image: 'assets/zenless-zone-zero.jpg' },
-    { id: 2, name: 'fate grand order', image: 'assets/fate-grand-order.jpg' },
-    { id: 3, name: 'honkai-star-rail', image: 'assets/honkai-star-rail.jpg' },
-    { id: 4, name: 'dragon ball dokkan battle', image: 'assets/dragon-ball-dokkan-battle.jpg' },
-    { id: 5, name: 'nikke goddess of victory', image: 'assets/nikke-goddess-of-victory.jpg' },
-    { id: 6, name: 'azur lane', image: 'assets/azur-lane.jpg' },
-  ];
+  games:Games[] = [];
+  constructor(private gamesService:GamesService) {
+    this.games = this.gamesService.getAllGames();
+    console.log(this.games);
+  }
 }
