@@ -1,28 +1,28 @@
-import * as dotenv from "dotenv";
-import express from "express";
-import cors from "cors";
-import { connectToDatabase } from "./database";
+// import * as dotenv from "dotenv";
+// import express from "express";
+// import cors from "cors";
+// import { connectToDatabase } from "./database";
 
-// Load environment variables from the .env file, where the ATLAS_URI is configured
-dotenv.config();
-
-const { ATLAS_URI } = process.env;
-
-if (!ATLAS_URI) {
-  console.error(
-    "No ATLAS_URI environment variable has been defined in config.env"
-  );
-  process.exit(1);
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://admin:5lWFzED2z5L5WxdV@cluster0.gltai.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
 }
-
-connectToDatabase(ATLAS_URI)
-  .then(() => {
-    const app = express();
-    app.use(cors());
-
-    // start the Express server
-    app.listen(5200, () => {
-      console.log(`Server running at http://localhost:5200...`);
-    });
-  })
-  .catch((error) => console.error(error));
+run().catch(console.dir);
