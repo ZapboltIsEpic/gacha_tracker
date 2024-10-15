@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
+    <div class="homepage">
       <h1>Welcome to {{title}}!</h1>
       <span>
         @for (game of games; track game.id) {
@@ -14,8 +15,9 @@ import { Component } from '@angular/core';
           </div>
         }
       </span>
+    </div>
   `,
-  styles: ``
+  styleUrls: ['homepage.component.css']
 })
 export class HomepageComponent {
   title = 'Gacha Tracker';

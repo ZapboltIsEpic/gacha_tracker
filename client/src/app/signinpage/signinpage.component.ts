@@ -8,19 +8,21 @@ import { Injectable } from '@angular/core';
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
-    <form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
-      <label>
-        Email:
-        <input id="email" type="email" formControlName="email">
-      </label>
-      <label>
-        Password:
-        <input id="password" type="password" formControlName="password">
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+    <div class="signinpage">
+      <form [formGroup]="applyForm" (ngSubmit)="onSubmit()">
+        <label>
+          Email:
+          <input id="email" type="email" formControlName="email">
+        </label>
+        <label>
+          Password:
+          <input id="password" type="password" formControlName="password">
+        </label>
+        <button mat-button type="submit">Submit</button>
+      </form>
+    </div>
   `,
-  styles: ``
+  styleUrls: ['signinpage.component.css']
 })
 export class SigninpageComponent {
   // @Injectable({
