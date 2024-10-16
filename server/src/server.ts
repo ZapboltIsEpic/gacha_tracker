@@ -1,28 +1,51 @@
-// import * as dotenv from "dotenv";
-// import express from "express";
-// import cors from "cors";
-// import { connectToDatabase } from "./database";
+// const cors = require('cors');
+// const express = require('express');
+// const Users = require('models/usersModels');
+// const connectDB = require('./utils/database');
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://admin:5lWFzED2z5L5WxdV@cluster0.gltai.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
+// const app = express();
+// app.use(cors());
+// connectDB();
+// const port = 3000;
+
+// var DATABASENAME = "gachatrackerdb";
+// var database;
+
+// app.get('/api/gachatracker/gachatrackerusers', (req, res) => {
+//   database.collection('gachatrackerusers').find().toArray((err, result) => {
+//     if (err) throw err
+//     res.send(result);
+//   });
+// });
+
+// app.listen(port, () => console.log(`Server running on port ${port}`));
+
+import cors from 'cors';
+import express, { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import {Users} from './models/usersModel'; 
+import {connectDB} from './utils/database';
+
+const app = express();
+app.use(cors());
+connectDB();
+const port = 3000;
+
+const DATABASENAME = "gachatrackerdb";
+let database: mongoose.Connection;
+
+mongoose.connection.once('open', () => {
+  database = mongoose.connection;
+  console.log('Connected to MongoDB');
+});
+
+app.get('/api/gachatracker/gachatrackerusers', async (req: Request, res: Response) => {
+  try {
+    const users = await Users.find().exec();
+    res.send(users);
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
+
+app.listen(port, () => console.log(`Server running on port ${port}`));
