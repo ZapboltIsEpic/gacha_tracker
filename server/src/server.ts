@@ -1,25 +1,3 @@
-// const cors = require('cors');
-// const express = require('express');
-// const Users = require('models/usersModels');
-// const connectDB = require('./utils/database');
-
-// const app = express();
-// app.use(cors());
-// connectDB();
-// const port = 3000;
-
-// var DATABASENAME = "gachatrackerdb";
-// var database;
-
-// app.get('/api/gachatracker/gachatrackerusers', (req, res) => {
-//   database.collection('gachatrackerusers').find().toArray((err, result) => {
-//     if (err) throw err
-//     res.send(result);
-//   });
-// });
-
-// app.listen(port, () => console.log(`Server running on port ${port}`));
-
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';

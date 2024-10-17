@@ -13,5 +13,3 @@ const userSchema = new mongoose.Schema({
 });
 
 export const Users = mongoose.model('gachatrackerusers', userSchema);
-
-module.exports = Users;

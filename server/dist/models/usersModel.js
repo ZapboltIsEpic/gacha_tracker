@@ -17,4 +17,3 @@ const userSchema = new mongoose_1.default.Schema({
     }
 });
 exports.Users = mongoose_1.default.model('gachatrackerusers', userSchema);
-module.exports = exports.Users;

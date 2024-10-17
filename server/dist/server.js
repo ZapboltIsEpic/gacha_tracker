@@ -1,8 +1,4 @@
 "use strict";
-// const cors = require('cors');
-// const express = require('express');
-// const Users = require('models/usersModels');
-// const connectDB = require('./utils/database');
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -16,19 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// const app = express();
-// app.use(cors());
-// connectDB();
-// const port = 3000;
-// var DATABASENAME = "gachatrackerdb";
-// var database;
-// app.get('/api/gachatracker/gachatrackerusers', (req, res) => {
-//   database.collection('gachatrackerusers').find().toArray((err, result) => {
-//     if (err) throw err
-//     res.send(result);
-//   });
-// });
-// app.listen(port, () => console.log(`Server running on port ${port}`));
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
