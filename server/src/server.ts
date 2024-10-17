@@ -1,10 +1,14 @@
 import cors from 'cors';
+import http from 'http';
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
+
+import {declareHandler} from './middleware/declareHandler';
 import {Users} from './models/usersModel'; 
 import {connectDB} from './utils/database';
 
-const app = express();
+export const app = express();
+export let httpServer: ReturnType<typeof http.createServer>;
 app.use(cors());
 connectDB();
 const port = 3000;
@@ -17,13 +21,6 @@ mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-app.get('/api/gachatracker/gachatrackerusers', async (req: Request, res: Response) => {
-  try {
-    const users = await Users.find().exec();
-    res.send(users);
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
+app.use(declareHandler);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
