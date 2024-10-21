@@ -5,6 +5,7 @@ SETUP:
 Backend:
 - npx tsc in server folder
 - npx tsx src/server.ts in server folder
+
 Frontend:
 - ng serve in client folder
 

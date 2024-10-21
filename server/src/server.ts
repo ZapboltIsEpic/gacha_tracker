@@ -9,18 +9,21 @@ import {connectDB} from './utils/database';
 
 export const app = express();
 export let httpServer: ReturnType<typeof http.createServer>;
-app.use(cors());
-connectDB();
-const port = 3000;
 
-const DATABASENAME = "gachatrackerdb";
-let database: mongoose.Connection;
+export const Main = () => {
+  app.use(cors());
+  connectDB();
+  const port = 3000;
 
-mongoose.connection.once('open', () => {
-  database = mongoose.connection;
-  console.log('Connected to MongoDB');
-});
+  const DATABASENAME = "gachatrackerdb";
+  let database: mongoose.Connection;
 
-app.use(declareHandler);
+  mongoose.connection.once('open', () => {
+    database = mongoose.connection;
+    console.log('Connected to MongoDB');
+  });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+  app.use(declareHandler);
+
+  app.listen(port, () => console.log(`Server running on port ${port}`));
+}
