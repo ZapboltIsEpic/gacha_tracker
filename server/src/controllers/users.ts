@@ -15,6 +15,7 @@ export class UsersController {
     }
 
     @Route('get', '/get/:id') 
+    // @MongoGet(Users)
     getUserById(req: Request, res: Response) {
         return res.status(200).json(req.mongoGet);
     }
@@ -26,11 +27,13 @@ export class UsersController {
     }
 
     @Route('put', '/update/:id')
+    // @MongoUpdate(Users)
     updateUser(req: Request, res: Response) {
         return res.status(200).json(req.mongoUpdate);
     }
 
     @Route('delete', '/delete/:id')
+    // @MongoDelete(Users)
     deleteUser(req: Request, res: Response) {
         return res.status(200).json({message: 'User deleted'});
     }
