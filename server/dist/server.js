@@ -18,23 +18,18 @@ const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 require("reflect-metadata");
 const declareHandler_1 = require("./middleware/declareHandler");
-const usersModel_1 = require("./models/usersModel");
 const database_1 = require("./utils/database");
 const main_1 = __importDefault(require("./controllers/main"));
 const routes_1 = require("./modules/routes");
+const users_1 = require("./controllers/users");
 exports.app = (0, express_1.default)();
 const Main = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.app.use((0, cors_1.default)());
-    (0, database_1.connectDB)();
+    exports.app.use(express_1.default.json());
+    yield (0, database_1.connectDB)();
     const port = 3000;
-    const DATABASENAME = "gachatrackerdb";
-    let database;
-    // mongoose.connection.once('open', () => {
-    //   database = mongoose.connection;
-    //   console.log('Connected to MongoDB');
-    // });
     exports.app.use(declareHandler_1.declareHandler);
-    (0, routes_1.defineRoutes)([main_1.default, usersModel_1.Users], exports.app);
+    (0, routes_1.defineRoutes)([main_1.default, users_1.UsersController], exports.app);
     exports.app.listen(port, () => console.log(`Server running on port ${port}`));
 });
 exports.Main = Main;

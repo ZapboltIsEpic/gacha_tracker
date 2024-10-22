@@ -8,20 +8,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MongoGetAll = MongoGetAll;
-function MongoGetAll(model) {
+exports.MongoCreate = MongoCreate;
+const mongoose_1 = __importDefault(require("mongoose"));
+function MongoCreate(model) {
     return function (target, propertyKey, descriptor) {
         const originalMethod = descriptor.value;
         descriptor.value = function (req, res, next) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const data = yield model.find();
-                    req.mongoGetAll = data;
-                    console.log('Fetched data:', data);
+                    const data = new model(Object.assign({ _id: new mongoose_1.default.Types.ObjectId() }, req.body));
+                    yield data.save();
+                    req.mongoCreate = data;
+                    console.log('Created data:', data);
                 }
                 catch (error) {
-                    return res.status(500).json({ message: 'Internal server error' });
+                    console.log(error);
+                    return res.status(400).json(error);
                 }
                 return originalMethod.call(this, req, res, next);
             });

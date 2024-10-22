@@ -9,11 +9,12 @@ export function MongoGetAll(model: Model<any>) {
             try {
                 const data = await model.find();
                 req.mongoGetAll = data;
+                console.log('Fetched data:', data);
             } catch (error) {
                 return res.status(500).json({message: 'Internal server error'});
             }
 
-            return originalMethod.call(this, [req, res, next]);
+            return originalMethod.call(this, req, res, next);
         }
 
         return descriptor;

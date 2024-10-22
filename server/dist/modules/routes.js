@@ -4,7 +4,6 @@ exports.defineRoutes = defineRoutes;
 function defineRoutes(controllers, application) {
     for (let i = 0; i < controllers.length; i++) {
         const controller = new controllers[i]();
-        console.log('controller: ' + controller);
         const routeHandlers = Reflect.getMetadata('routeHandlers', controller);
         console.log('routeHandlers: ' + routeHandlers);
         const controllerPath = Reflect.getMetadata('baseRoute', controller.constructor);

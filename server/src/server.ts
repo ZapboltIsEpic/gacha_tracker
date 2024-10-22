@@ -9,26 +9,20 @@ import {Users} from './models/usersModel';
 import {connectDB} from './utils/database';
 import MainController from './controllers/main';
 import { defineRoutes } from './modules/routes';
+import { UsersController } from './controllers/users';
 
 export const app = express();
 export let httpServer: ReturnType<typeof http.createServer>;
 
 export const Main = async () => {
   app.use(cors());
-  connectDB();
+  app.use(express.json());
+  await connectDB();
   const port = 3000;
-
-  const DATABASENAME = "gachatrackerdb";
-  let database: mongoose.Connection;
-
-  // mongoose.connection.once('open', () => {
-  //   database = mongoose.connection;
-  //   console.log('Connected to MongoDB');
-  // });
 
   app.use(declareHandler);
 
-  defineRoutes([MainController, Users], app);
+  defineRoutes([MainController, UsersController], app);
 
   app.listen(port, () => console.log(`Server running on port ${port}`));
 }

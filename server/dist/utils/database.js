@@ -14,11 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const dbURI = "mongodb+srv://admin:5lWFzED2z5L5WxdV@cluster0.gltai.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const dbURI = "mongodb+srv://admin:5lWFzED2z5L5WxdV@cluster0.gltai.mongodb.net/gachatrackerdb?retryWrites=true&w=majority&appName=Cluster0";
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(dbURI)
-            .then(() => console.log('Connected to MongoDB'));
+        yield mongoose_1.default.connect(dbURI);
+        console.log('Connected to MongoDB');
+        if (mongoose_1.default.connection.db) {
+            const currentDB = mongoose_1.default.connection.db.databaseName;
+            console.log(`You are currently connected to: ${currentDB}`);
+        }
+        else {
+            console.log('Database connection is undefined');
+        }
     }
     catch (err) {
         console.log(err);
