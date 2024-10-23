@@ -17,15 +17,18 @@ let UsersController = class UsersController {
         console.log('Get all users');
         return res.status(200).json(req.mongoGetAll);
     }
+    // @MongoGet(Users)
     getUserById(req, res) {
         return res.status(200).json(req.mongoGet);
     }
     createUser(req, res) {
         return res.status(200).json(req.mongoCreate);
     }
+    // @MongoUpdate(Users)
     updateUser(req, res) {
         return res.status(200).json(req.mongoUpdate);
     }
+    // @MongoDelete(Users)
     deleteUser(req, res) {
         return res.status(200).json({ message: 'User deleted' });
     }
@@ -37,6 +40,7 @@ __decorate([
 ], UsersController.prototype, "getAllUsers", null);
 __decorate([
     (0, route_1.Route)('get', '/get/:id')
+    // @MongoGet(Users)
 ], UsersController.prototype, "getUserById", null);
 __decorate([
     (0, route_1.Route)('post', '/create'),
@@ -44,9 +48,11 @@ __decorate([
 ], UsersController.prototype, "createUser", null);
 __decorate([
     (0, route_1.Route)('put', '/update/:id')
+    // @MongoUpdate(Users)
 ], UsersController.prototype, "updateUser", null);
 __decorate([
     (0, route_1.Route)('delete', '/delete/:id')
+    // @MongoDelete(Users)
 ], UsersController.prototype, "deleteUser", null);
 exports.UsersController = UsersController = __decorate([
     (0, controller_1.Controller)('/api/gachatracker/gachatrackerusers')

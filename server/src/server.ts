@@ -5,11 +5,13 @@ import mongoose from 'mongoose';
 import 'reflect-metadata';
 
 import {declareHandler} from './middleware/declareHandler';
+import {imageHandler} from './middleware/imageHandler';
 import {Users} from './models/usersModel'; 
 import {connectDB} from './utils/database';
 import MainController from './controllers/main';
 import { defineRoutes } from './modules/routes';
 import { UsersController } from './controllers/users';
+import { GamesController } from './controllers/games';
 
 export const app = express();
 export let httpServer: ReturnType<typeof http.createServer>;
@@ -21,8 +23,9 @@ export const Main = async () => {
   const port = 3000;
 
   app.use(declareHandler);
+  // app.use(imageHandler);
 
-  defineRoutes([MainController, UsersController], app);
+  defineRoutes([MainController, UsersController, GamesController], app);
 
   app.listen(port, () => console.log(`Server running on port ${port}`));
 }

@@ -20,7 +20,7 @@ function MongoCreate(model) {
         descriptor.value = function (req, res, next) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    const data = new model(Object.assign({ _id: new mongoose_1.default.Types.ObjectId() }, req.body));
+                    const data = new model(Object.assign(Object.assign({ _id: new mongoose_1.default.Types.ObjectId() }, req.body), { image: req.file ? req.file.buffer : undefined }));
                     yield data.save();
                     req.mongoCreate = data;
                     console.log('Created data:', data);

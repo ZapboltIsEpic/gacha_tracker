@@ -9,7 +9,8 @@ export function MongoCreate(model: Model<any>) {
             try {
                 const data = new model({
                     _id: new mongoose.Types.ObjectId(),
-                    ...req.body
+                    ...req.body,
+                    image: req.file ? req.file.buffer : undefined
                 });
 
                 await data.save();
