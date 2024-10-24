@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { provideHttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signinpage',
@@ -27,11 +28,11 @@ import { Injectable } from '@angular/core';
 })
 export class SigninpageComponent {
   applyForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
   getData() {
     return this.http.get('http://localhost:3000/api/gachatracker/gachatrackerusers/get/all');
@@ -43,8 +44,12 @@ export class SigninpageComponent {
       const user = data.find((user: any) => user.email === email && user.password === password);
       if (user) {
         console.log('Credentials match:', user);
+        // Navigate to homepage
+        this.router.navigate(['/']);
+        // NEED TO DO: Pass user data, and keep track of user session
       } else {
         console.log('Credentials do not match');
+        alert('Login failed');
       }
     });
   }
