@@ -1,7 +1,7 @@
 .sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #333;
+    background-color: #0f0f0f;
     color: white;
     position: fixed;
     top: 0;
@@ -10,4 +10,20 @@
     flex-direction: column;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+}
+
+#title {
+    padding-left: 16%;
+    font-size: 21px;
+}
+
+.gameItem {
+    background-color: #0f0f0f;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 40px;
 }
