@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
       <div [id] = "title">
         <span>Gacha Tracker</span>
       </div>
+      <button mat-button routerLink = "/">Home</button>
       <div [id] = "gameSection">
         <span>Games</span>
         <div *ngFor="let game of games">
@@ -42,6 +43,6 @@ export class SidebarComponent {
   }
 
   navigateToGamePage(gameName: string) {
-    this.router.navigate(['/games/' + gameName]);
+    this.router.navigate(['/game/' + gameName]);
   }
 }
