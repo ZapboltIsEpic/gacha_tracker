@@ -8,7 +8,6 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const userSchema = new mongoose_1.default.Schema({
     id: {
         type: Number,
-        required: true,
         unique: true
     },
     email: {

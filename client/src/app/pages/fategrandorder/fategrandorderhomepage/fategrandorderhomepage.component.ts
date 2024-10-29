@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
     standalone: true,
     imports: [],
     template: `
-      <div>
+      <div class ="homepage">
         This is FGO Homepage
       </div>
     `,
