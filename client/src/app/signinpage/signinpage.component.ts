@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
-import { error } from 'console';
 import { catchError } from 'rxjs';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-signinpage',
@@ -63,7 +63,7 @@ export class SigninpageComponent {
 
   form = 'form';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private localStorageService : LocalStorageService) {}
 
   getData() {
     return this.http.get('http://localhost:3000/api/gachatracker/gachatrackerusers/get/all');
@@ -77,8 +77,9 @@ export class SigninpageComponent {
         console.log('Credentials match:', user);
         // Navigate to homepage
         alert('Login successful');
+        // set to login id later
+        this.localStorageService.setItem('loggedIn', user.email);
         this.router.navigate(['/']);
-        // NEED TO DO: Pass user data, and keep track of user session
       } else {
         console.log('Credentials do not match');
         alert('Login failed');
