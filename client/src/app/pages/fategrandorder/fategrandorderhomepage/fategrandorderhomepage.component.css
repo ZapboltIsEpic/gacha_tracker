@@ -1,9 +1,16 @@
 .homepage {
     color: #f1f1f1;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 30%;
     height: 100vh;
     background-color: #21211f;
+}
+
+.homepagebox {
+    display: flex;
+    flex-direction: column;
+    color: #ebebec;
+    text-decoration: none;
 }
