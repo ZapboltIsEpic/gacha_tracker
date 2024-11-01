@@ -17,7 +17,13 @@ function MongoGetAll(model) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
                     const data = yield model.find();
-                    req.mongoGetAll = data;
+                    const transformedData = data.map((item) => {
+                        if (item.image && Buffer.isBuffer(item.image)) {
+                            return Object.assign(Object.assign({}, item.toObject()), { image: `data:image/jpeg;base64,${item.image.toString('base64')}` });
+                        }
+                        return item;
+                    });
+                    req.mongoGetAll = transformedData;
                     console.log('Fetched data:', data);
                 }
                 catch (error) {
