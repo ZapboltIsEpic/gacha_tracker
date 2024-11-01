@@ -12,6 +12,7 @@ import MainController from './controllers/main';
 import { defineRoutes } from './modules/routes';
 import { UsersController } from './controllers/users';
 import { GamesController } from './controllers/games';
+import { FGOServantsController } from './controllers/fgo-servants';
 
 export const app = express();
 export let httpServer: ReturnType<typeof http.createServer>;
@@ -25,7 +26,7 @@ export const Main = async () => {
   app.use(declareHandler);
   // app.use(imageHandler);
 
-  defineRoutes([MainController, UsersController, GamesController], app);
+  defineRoutes([MainController, UsersController, GamesController, FGOServantsController], app);
 
   app.listen(port, () => console.log(`Server running on port ${port}`));
 }
