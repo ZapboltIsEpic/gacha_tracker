@@ -1,0 +1,10 @@
+.servantBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    width: 20%; 
+    padding-top: 10px; 
+    padding-bottom: 10px
+}

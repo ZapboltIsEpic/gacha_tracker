@@ -6,10 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FGOServants = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const fgoservantSchema = new mongoose_1.default.Schema({
-    id: {
-        type: Number,
-        unique: true
-    },
     name: {
         type: String,
         required: true,

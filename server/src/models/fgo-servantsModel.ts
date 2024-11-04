@@ -1,10 +1,6 @@
 import mongoose from 'mongoose';
 
 const fgoservantSchema = new mongoose.Schema({
-    id: {
-        type: Number,
-        unique: true
-    },
     name: {
         type: String,
         required: true,

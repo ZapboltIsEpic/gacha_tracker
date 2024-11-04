@@ -10,18 +10,25 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div [class]="homepage">
-      <h1>Servants</h1>
       <div>
-        <div *ngFor="let servant of servants">
-          {{ servant.name }} 
-          <img src="{{ servant.image }}" height = 222px width =130px>
-        </div>
+        <h1>Servants</h1>
+        <table>
+          <tr *ngFor="let servant of servants">
+            <td [class]="servantBox">
+              <img src="{{ servant.image }}" height = 222px width =130px>
+            </td>
+            <td>
+              {{ servant.name }} 
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   `,
   styleUrls: ['./servants.component.css', '../fategrandorderhomepage/fategrandorderhomepage.component.css']
 })
 export class ServantsComponent {
+  servantBox = 'servantBox';
   // add personalised servants and all servants in different tabs
   constructor(private router: Router, private http: HttpClient, private localStorageService : LocalStorageService) {}
 
