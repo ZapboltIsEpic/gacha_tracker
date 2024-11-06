@@ -1,6 +1,13 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const dbURI = "mongodb+srv://admin:5lWFzED2z5L5WxdV@cluster0.gltai.mongodb.net/gachatrackerdb?retryWrites=true&w=majority&appName=Cluster0";
+dotenv.config();
+
+const dbURI = process.env.DB_URI;
+
+if (!dbURI) {
+    throw new Error('DB_URI is not defined in the environment variables');
+}
 
 export const connectDB = async () => {
     try {

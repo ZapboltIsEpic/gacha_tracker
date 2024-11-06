@@ -14,7 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-const dbURI = "mongodb+srv://admin:5lWFzED2z5L5WxdV@cluster0.gltai.mongodb.net/gachatrackerdb?retryWrites=true&w=majority&appName=Cluster0";
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const dbURI = process.env.DB_URI;
+if (!dbURI) {
+    throw new Error('DB_URI is not defined in the environment variables');
+}
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield mongoose_1.default.connect(dbURI);
