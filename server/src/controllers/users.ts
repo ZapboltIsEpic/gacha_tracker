@@ -7,6 +7,9 @@ import { MongoCreate } from '../decorators/mongoose/create';
 
 @Controller('/api/gachatracker/gachatrackerusers')
 export class UsersController {
+    // @Route('post', '/login')
+    // @M
+
     @Route('get', '/get/all')
     @MongoGetAll(Users)
     getAllUsers(req: Request, res: Response) {

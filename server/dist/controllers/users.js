@@ -13,6 +13,8 @@ const getAll_1 = require("../decorators/mongoose/getAll");
 const usersModel_1 = require("../models/usersModel");
 const create_1 = require("../decorators/mongoose/create");
 let UsersController = class UsersController {
+    // @Route('post', '/login')
+    // @M
     getAllUsers(req, res) {
         console.log('Get all users');
         return res.status(200).json(req.mongoGetAll);
