@@ -10,6 +10,6 @@ Frontend:
 - ng serve in client folder
 
 Requirements/Checklist:
+- Finish personalised servants in fgo
+- Complete craft essences in fgo
 - Add individual gacha game website/progression
-- Link to backend and store progression
-- make sidebar look nice and actually useable
