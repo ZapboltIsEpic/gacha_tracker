@@ -3,24 +3,43 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../../../local-storage.service';
 import { CommonModule } from '@angular/common';
+import { SearchbarComponent } from '../../../navbar/searchbar/searchbar.component';
 
 @Component({
   selector: 'app-servants',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SearchbarComponent],
   template: `
     <div [class]="homepage">
       <div *ngIf="personalisedServant===''">
         <h1>Servants</h1>
+        <div [class]="row">
+          <span><img alt="saber class icon" title="Saber" src="https://static.atlasacademy.io/JP/ClassIcons/class2_1.png" width="37" height="37"></span>
+        </div>
+        <app-searchbar></app-searchbar>
         <table>
-          <tr *ngFor="let servant of servants; trackBy: trackByServant">
-            <td [class]="servantBox" (click)="getPersonalisedServant(servant.name)">
-              <img src="{{ servant.image }}" height = 222px width =130px>
-            </td>
-            <td>
-              {{ servant.name }} 
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Rarity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let servant of servants; trackBy: trackByServant">
+              <td>{{servant.class}}</td>
+              <td (click)="getPersonalisedServant(servant.name)">
+                <img src="{{ servant.image }}" height = 222px width =130px>
+              </td>
+              <td>
+                {{ servant.name }} 
+              </td>
+              <td>
+                {{ servant.rarity }} 
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div *ngIf="personalisedServant!=''">
@@ -35,6 +54,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ServantsComponent {
+  row = 'row';
   homepage = 'homepage';
   servants: any[] = [];
   servantBox = 'servantBox';
