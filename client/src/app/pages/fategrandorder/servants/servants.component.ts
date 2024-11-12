@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../../../local-storage.service';
 import { CommonModule } from '@angular/common';
 import { SearchbarComponent } from '../../../navbar/searchbar/searchbar.component';
+import { DataService } from '../../../services/data.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-servants',
@@ -27,6 +29,9 @@ import { SearchbarComponent } from '../../../navbar/searchbar/searchbar.componen
             </tr>
           </thead>
           <tbody>
+            <tr *ngIf="!servants || !servants.length">
+              <td colspan="4">Loading...</td>
+            </tr>
             <tr *ngFor="let servant of servants; trackBy: trackByServant">
               <td>{{servant.class}}</td>
               <td (click)="getPersonalisedServant(servant.name)">
@@ -59,6 +64,7 @@ export class ServantsComponent {
   servants: any[] = [];
   servantBox = 'servantBox';
   personalisedServant = '';
+  
   trackByServant(index: number, servant: any): string {
     return servant.name;
   }
@@ -69,16 +75,17 @@ export class ServantsComponent {
   }
 
   // add personalised servants 
-  constructor(private router: Router, private http: HttpClient, private localStorageService : LocalStorageService) {}
+  constructor(private router: Router, private dataService : DataService, private localStorageService : LocalStorageService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.getServants();
   }
 
   getServants(): void {
-    this.http.get('http://localhost:3000/api/gachatracker/fgo/servants/get/all')
+    this.dataService.getData('http://localhost:3000/api/gachatracker/fgo/servants/get/all')
       .subscribe((data: any) => {
         this.servants = data;
+        this.cd.detectChanges();
         console.log('Servants:', this.servants);
       }, (error) => {
         console.error('Error fetching servants:', error);
