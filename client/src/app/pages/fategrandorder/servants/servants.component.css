@@ -21,4 +21,9 @@ th, td {
     margin-left: -15px;
 }
 
+.filter {
+    cursor: pointer;
+    margin: 0 5px;
+}
+
 /* cursor: pointer , to make cursor a pointer */
