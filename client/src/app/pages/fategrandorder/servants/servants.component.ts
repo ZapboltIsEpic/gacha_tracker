@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../../../local-storage.service';
 import { CommonModule } from '@angular/common';
 import { SearchbarComponent } from '../../../navbar/searchbar/searchbar.component';
+import { FormsModule } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -21,7 +22,7 @@ import { ChangeDetectorRef } from '@angular/core';
             <img *ngIf="!servantFilterClassMap[servant.title]" [alt]="servant.name" [title]="servant.title" [src]="servant.image" width="37" height="37">
           </span>
         </div>
-        <app-searchbar></app-searchbar>
+        <app-searchbar (searchTermChanged)="onSearch($event)"></app-searchbar>
         <table>
           <thead>
             <tr>
@@ -69,6 +70,7 @@ export class ServantsComponent {
   filteredServants: any[] = [];
   servantBox = 'servantBox';
   personalisedServant = '';
+  searchTerm = '';
 
   servantFilterClassMap : { [key : string]: boolean } = {
     "All" : true,
@@ -111,13 +113,13 @@ export class ServantsComponent {
 
   ngOnInit(): void {
     this.getServants();
-    this.getFilteredServants();
   }
 
   getServants(): void {
     this.dataService.getData('http://localhost:3000/api/gachatracker/fgo/servants/get/all')
       .subscribe((data: any) => {
         this.servants = data;
+        this.getFilteredServants(this.searchTerm);
         this.cd.detectChanges();
         console.log('Servants:', this.servants);
       }, (error) => {
@@ -125,27 +127,37 @@ export class ServantsComponent {
       });
   }
 
-  getFilteredServants() : void {
+  getFilteredServants(searchTerm: string) : void {
     this.filteredServants = [];
     this.servants.forEach((servant: any) => {
       const { class: servantClass, rarity } = servant;
-      const push_filter = (this.servantFilterClassMap["All"] && this.servantFilterRarityMap[0]) || 
+      const class_filter = (this.servantFilterClassMap["All"] && this.servantFilterRarityMap[0]) || 
                           (this.servantFilterClassMap["All"] && this.servantFilterRarityMap[rarity]) || 
                           (this.servantFilterClassMap[servantClass] && this.servantFilterRarityMap[0]) ||
                           (this.servantFilterClassMap[servantClass] && this.servantFilterRarityMap[rarity]);
+
+      const search_filter = servant.name.toLowerCase().includes(searchTerm.toLowerCase())
+
+      console.log(servant.name, searchTerm, class_filter, search_filter);
       
-      if (push_filter) {
+      if (class_filter && search_filter) {
         this.filteredServants.push(servant);
       }
     });
     console.log('Filtered Servants', this.filteredServants);
-    this.cd.detectChanges();
+  }
+
+  onSearch(searchTerm: string): void {
+    this.searchTerm = searchTerm;
+    this.getFilteredServants(searchTerm);
+    console.log('Search Term:', searchTerm);
   }
 
   filterByClass(servantClass : string) {
     this.servantFilterClassMap[servantClass] = !this.servantFilterClassMap[servantClass];
     this.checkFilteredServants();
-    this.getFilteredServants();
+    console.log("serachterm", this.searchTerm);
+    this.getFilteredServants(this.searchTerm);
   }
 
   checkFilteredServants() {
