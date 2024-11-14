@@ -9,6 +9,7 @@ import { DataService } from '../../../services/data.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { ServantIcons } from '../../../shared/models/servantIcons';
 import { ServantIconsService } from '../../../services/servantIcons.service';
+import { FGOServants } from '../../../shared/models/fgoServants.model';
 
 @Component({
   selector: 'app-servants',
@@ -65,15 +66,15 @@ import { ServantIconsService } from '../../../services/servantIcons.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ServantsComponent {
+  // variables
   filter = 'filter';
   row = 'row';
   homepage = 'homepage';
-  servants: any[] = [];
-  filteredServants: any[] = [];
+  servants: FGOServants[] = [];
+  filteredServants: FGOServants[] = [];
   servantBox = 'servantBox';
   personalisedServant = '';
   searchTerm = '';
-
   servantFilterClassMap : { [key : string]: boolean } = {
     "All" : true,
     "Saber" : false,
@@ -91,7 +92,6 @@ export class ServantsComponent {
     "Pretender" : false,
     "Unknown" : false
   };
-
   servantFilterRarityMap: { [key: number]: boolean } = {
     0 : true,
     1: false,
@@ -100,15 +100,6 @@ export class ServantsComponent {
     4: false,
     5: false
   };
-  
-  trackByServant(index: number, servant: any): string {
-    return servant.name;
-  }
-
-  getPersonalisedServant(servant: string): void {
-    console.log('Personalised servant:', servant);
-    this.personalisedServant = servant;
-  }
 
   // add personalised servants 
   servantIcons:ServantIcons[] = [];
@@ -121,8 +112,17 @@ export class ServantsComponent {
     this.getServants();
   }
 
+  // functions 
+  trackByServant(index: number, servant: any): string {
+    return servant.name;
+  }
+  getPersonalisedServant(servant: string): void {
+    console.log('Personalised servant:', servant);
+    this.personalisedServant = servant;
+  }
+
   getServants(): void {
-    this.dataService.getData('http://localhost:3000/api/gachatracker/fgo/servants/get/all')
+    this.dataService.getData<FGOServants[]>('http://localhost:3000/api/gachatracker/fgo/servants/get/all')
       .subscribe((data: any) => {
         this.servants = data;
         this.getFilteredServants(this.searchTerm);

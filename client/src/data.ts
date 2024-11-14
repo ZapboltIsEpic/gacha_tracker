@@ -9,7 +9,7 @@ export const games: Games[] = [
     { id: 4, name: 'Dragon Ball Z Dokkan Battle', image: 'dragon-ball-dokkan-battle.jpg' },
     { id: 5, name: 'Goddess of Victory: Nikke', image: 'nikke-goddess-of-victory.jpg' },
     { id: 6, name: 'Azur Lane', image: 'azur-lane.jpg' },
-]
+];
 
 export const servantIcons: ServantIcons[] = [
     { name: "saber class icon", title: "Saber", image: "https://static.atlasacademy.io/JP/ClassIcons/class2_1.png", image2: "https://static.atlasacademy.io/JP/ClassIcons/class3_1.png"},
@@ -26,4 +26,4 @@ export const servantIcons: ServantIcons[] = [
     { name: "foreigner class icon", title: "Foreigner", image: "https://static.atlasacademy.io/JP/ClassIcons/class2_25.png", image2: "https://static.atlasacademy.io/JP/ClassIcons/class3_25.png" },
     { name: "pretender class icon", title: "Pretender", image: "https://static.atlasacademy.io/JP/ClassIcons/class2_28.png", image2: "https://static.atlasacademy.io/JP/ClassIcons/class3_28.png" },
     { name: "unknown class icon", title: "Unknown", image: "https://static.atlasacademy.io/JP/ClassIcons/class2_97.png", image2: "https://static.atlasacademy.io/JP/ClassIcons/class3_97.png" }
-  ];
+];
