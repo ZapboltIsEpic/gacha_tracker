@@ -65,26 +65,23 @@ export class SigninpageComponent {
 
   constructor(private router: Router, private http: HttpClient, private localStorageService : LocalStorageService) {}
 
-  getData() {
-    return this.http.get('http://localhost:3000/api/gachatracker/gachatrackerusers/get/all');
-  }
-
-  // temporary function where i have to go through all users, change to more efficient method later
   checkCredentials(email: string, password: string): void {
-    this.getData().subscribe((data: any) => {
-      const user = data.find((user: any) => user.email === email && user.password === password);
-      if (user) {
-        console.log('Credentials match:', user);
+    this.http.post('http://localhost:3000/api/gachatracker/gachatrackerusers/login', this.applyForm.value)
+      .pipe( 
+        catchError((error) => {
+          console.log('Error occurred during sign up:', error);
+          alert('Sign up failed');
+          throw error;
+        })
+      )
+      .subscribe((data: any) => {
+        console.log('Credentials match:', data.email);
         // Navigate to homepage
         alert('Login successful');
         // set to login id later
-        this.localStorageService.setItem('loggedIn', user.email);
+        this.localStorageService.setItem('loggedIn', data.email);
         this.router.navigate(['/']);
-      } else {
-        console.log('Credentials do not match');
-        alert('Login failed');
-      }
-    });
+      });
   }
 
   onSubmit() {

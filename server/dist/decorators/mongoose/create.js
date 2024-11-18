@@ -14,12 +14,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MongoCreate = MongoCreate;
 const mongoose_1 = __importDefault(require("mongoose"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 function MongoCreate(model) {
     return function (target, propertyKey, descriptor) {
         const originalMethod = descriptor.value;
         descriptor.value = function (req, res, next) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
+                    // USER REGISTER 
+                    if (req.body.password) {
+                        req.body.password = yield bcrypt_1.default.hash(req.body.password, 10);
+                    }
                     const data = new model(Object.assign(Object.assign({ _id: new mongoose_1.default.Types.ObjectId() }, req.body), { image: req.file ? req.file.buffer : undefined }));
                     yield data.save();
                     req.mongoCreate = data;
