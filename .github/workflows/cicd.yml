@@ -16,12 +16,19 @@ jobs:
               run: echo "MONGO_PASSWORD=${{ secrets.MONGO_URI }}" >> .env
             - name: Login to docker hub
               run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            - name: Build docker image
+            - name: Build docker image for backend
               working-directory: server
               run: docker build -t zapbolt/gacha-tracker-backend .
-            - name: Publish image to docker hub
+            - name: Publish image to docker hub for backend
               working-directory: server
               run: docker push zapbolt/gacha-tracker-backend:latest .
+            - name: Builder docker image for frontend
+              working-directory: client
+              run: docker push zapbolt/gacha-tracker-frontend .
+            - name: Publish image to docker hub for frontend
+              working-directory: server
+              run: docker push zapbolt/gacha-tracker-frontend:latest .
+
         
     deploy:
         needs: build
