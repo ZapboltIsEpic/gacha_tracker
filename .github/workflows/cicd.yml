@@ -16,9 +16,9 @@ jobs:
             - name: Login to docker hub
               run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             - name: Build docker image
-              run: docker build -t ...(replace with ... with name)
+              run: docker build -t zapbolt/gacha-tracker-backend
             - name: Publish image to docker hub
-              run: docker push .../:latest
+              run: docker push zapbolt/gacha-tracker-backend:latest
         
     deploy:
         needs: build
@@ -29,6 +29,6 @@ jobs:
             - name: Delete old container
               run: docker rm -f gacha_tracker-container
             - name: Run docker container
-              run: docker run -d -p 4000:4000 --name gacha_tracker-container ...
+              run: docker run -d -p 4000:4000 --name gacha_tracker-backend-container zapbolt/gacha-tracker-backend
 
             
