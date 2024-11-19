@@ -3,8 +3,8 @@ name: Deploy MEAN Application
 on:
     push:
         branches:
-            -mean-ec2-docker
-            -main
+            - mean-ec2-docker
+            - main
 
 jobs:
     build:
@@ -17,18 +17,18 @@ jobs:
             - name: Login to docker hub
               run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             - name: Build docker image
-              run: docker build -t zapbolt/gacha-tracker-backend
+              run: docker build -t zapbolt/gacha-tracker-backend .
             - name: Publish image to docker hub
-              run: docker push zapbolt/gacha-tracker-backend:latest
+              run: docker push zapbolt/gacha-tracker-backend:latest .
         
     deploy:
         needs: build
         runs-on: self-hosted
         steps:
             - name: Pull image from docker hub
-              run: docker pull .../:latest
+              run: docker pull zapbolt/gacha-tracker-backend:latest
             - name: Delete old container
-              run: docker rm -f gacha_tracker-container
+              run: docker rm -f gacha_tracker-backend-container
             - name: Run docker container
               run: docker run -d -p 4000:4000 --name gacha_tracker-backend-container zapbolt/gacha-tracker-backend
 
