@@ -9,6 +9,8 @@ RUN npm ci
  
 # Copy the application source
 COPY . .
+# Ensure tsc is executable
+RUN chmod +x ./node_modules/.bin/tsc
 # Build typescript
 RUN npm run build
  
