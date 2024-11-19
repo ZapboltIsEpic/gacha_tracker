@@ -12,7 +12,7 @@ jobs:
             - name: Checkout source
               uses: actions/checkout@v4
             - name: Create .env file
-              run: echo "MONGO_PASSWORD=${{ secrets.MONGO_URI }}>.env"
+              run: echo "MONGO_PASSWORD=${{ secrets.MONGO_URI }}" >> .env
             - name: Login to docker hub
               run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             - name: Build docker image
@@ -29,6 +29,6 @@ jobs:
             - name: Delete old container
               run: docker rm -f gacha_tracker-container
             - name: Run docker container
-              run: docker container -d -p 4000:4000 --name gacha_tracker-container ...
+              run: docker run -d -p 4000:4000 --name gacha_tracker-container ...
 
             
