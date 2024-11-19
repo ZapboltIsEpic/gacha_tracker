@@ -42,7 +42,7 @@ jobs:
           - name: Delete old container for backend
             run: docker rm -f gacha_tracker-backend-container
           - name: Run docker container for backend
-            run: docker run -d -p 4000:4000 --name gacha_tracker-backend-container --env-file .env zapbolt/gacha-tracker-backend
+            run: docker run -d -p 4000:4000 --name gacha_tracker-backend-container zapbolt/gacha-tracker-backend
           # Frontend
           - name: Pull image from docker hub for frontend
             run: docker pull zapbolt/gacha-tracker-frontend:latest
