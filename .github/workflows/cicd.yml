@@ -16,20 +16,41 @@ jobs:
               run: echo "MONGO_PASSWORD=${{ secrets.MONGO_URI }}" >> .env
             - name: Login to docker hub
               run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            - name: Build docker image
-              run: docker build -t zapbolt/gacha-tracker-backend .
-            - name: Publish image to docker hub
-              run: docker push zapbolt/gacha-tracker-backend:latest .
+            - name: Build and Push Docker Images
+              working-directory: ./gacha_tracker
+              run: |
+                docker-compose build
+                docker-compose push
+            # - name: Build docker image
+            #   run: docker build -t zapbolt/gacha-tracker-backend .
+            # - name: Publish image to docker hub
+            #   run: docker push zapbolt/gacha-tracker-backend:latest .
         
     deploy:
         needs: build
         runs-on: self-hosted
         steps:
-            - name: Pull image from docker hub
-              run: docker pull zapbolt/gacha-tracker-backend:latest
-            - name: Delete old container
-              run: docker rm -f gacha_tracker-backend-container
-            - name: Run docker container
-              run: docker run -d -p 4000:4000 --name gacha_tracker-backend-container zapbolt/gacha-tracker-backend
+          # Step 1: Checkout repository
+          - name: Checkout source
+            uses: actions/checkout@v4
+
+          # Step 2: Pull updated images
+          - name: Pull images using Docker Compose
+            working-directory: ./gacha_tracker
+            run: docker-compose pull
+
+          # Step 3: Recreate and run services
+          - name: Deploy using Docker Compose
+            working-directory: ./gacha_tracker
+            run: |
+              docker-compose down
+              docker-compose up -d
+              
+            # - name: Pull image from docker hub
+            #   run: docker pull zapbolt/gacha-tracker-backend:latest
+            # - name: Delete old container
+            #   run: docker rm -f gacha_tracker-backend-container
+            # - name: Run docker container
+            #   run: docker run -d -p 4000:4000 --name gacha_tracker-backend-container zapbolt/gacha-tracker-backend
 
             
