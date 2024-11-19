@@ -38,7 +38,7 @@ jobs:
             uses: actions/checkout@v4
           # Backend
           - name: Pull image from docker hub for backend
-            run: docker pull zapbolt/gacha-tracker-backend:latest
+            run: sudo docker pull zapbolt/gacha-tracker-backend:latest
           - name: Delete old container for backend
             run: docker rm -f gacha_tracker-backend-container
           - name: Run docker container for backend
