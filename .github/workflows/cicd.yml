@@ -24,7 +24,7 @@ jobs:
               run: docker push zapbolt/gacha-tracker-backend:latest
             - name: Builder docker image for frontend
               working-directory: client
-              run: docker push zapbolt/gacha-tracker-frontend .
+              run: docker build -t zapbolt/gacha-tracker-frontend .
             - name: Publish image to docker hub for frontend
               working-directory: server
               run: docker push zapbolt/gacha-tracker-frontend:latest
