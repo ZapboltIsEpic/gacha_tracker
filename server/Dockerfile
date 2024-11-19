@@ -26,5 +26,5 @@ RUN npm ci --production
  
 COPY --from=build /usr/src/app/dist /app
  
-EXPOSE 8000
+EXPOSE 4000
 CMD [ "node", "src/server.ts"]
