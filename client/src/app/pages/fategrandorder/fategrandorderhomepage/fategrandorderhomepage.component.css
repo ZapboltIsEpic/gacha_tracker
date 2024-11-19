@@ -1,9 +1,10 @@
 .homepage {
+    overflow: auto;
     color: #f1f1f1;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30%;
+    padding: 10% 30%;
     height: 100vh;
     background-color: #21211f;
 }
