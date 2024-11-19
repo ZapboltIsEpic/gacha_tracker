@@ -21,15 +21,14 @@ jobs:
               run: docker build -t zapbolt/gacha-tracker-backend .
             - name: Publish image to docker hub for backend
               working-directory: server
-              run: docker push zapbolt/gacha-tracker-backend:latest .
+              run: docker push zapbolt/gacha-tracker-backend:latest
             - name: Builder docker image for frontend
               working-directory: client
               run: docker push zapbolt/gacha-tracker-frontend .
             - name: Publish image to docker hub for frontend
               working-directory: server
-              run: docker push zapbolt/gacha-tracker-frontend:latest .
-
-        
+              run: docker push zapbolt/gacha-tracker-frontend:latest
+       
     deploy:
         needs: build
         runs-on: self-hosted
@@ -37,11 +36,19 @@ jobs:
           # Step 1: Checkout repository
           - name: Checkout source
             uses: actions/checkout@v4
-          - name: Pull image from docker hub
+          # Backend
+          - name: Pull image from docker hub for backend
             run: docker pull zapbolt/gacha-tracker-backend:latest
-          - name: Delete old container
+          - name: Delete old container for backend
             run: docker rm -f gacha_tracker-backend-container
-          - name: Run docker container
+          - name: Run docker container for backend
             run: docker run -d -p 4000:4000 --name gacha_tracker-backend-container zapbolt/gacha-tracker-backend
+          # Frontend
+          - name: Pull image from docker hub for frontend
+            run: docker pull zapbolt/gacha-tracker-frontend:latest
+          - name: Delete old container for frontend
+            run: docker rm -f gacha_tracker-frontend-container
+          - name: Run docker container for frontend
+            run: docker run -d -p 4200:4000 --name gacha_tracker-frontend-container zapbolt/gacha-tracker-frontend
 
             
