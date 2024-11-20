@@ -15,6 +15,11 @@ RUN npm run build
 # Production stage
 FROM nginx:stable-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Clear the Nginx HTML directory
+WORKDIR /usr/share/nginx/html
+RUN rm -rf *
+
 COPY --from=build /usr/src/app/dist/client /usr/share/nginx/html
 
 EXPOSE 80
