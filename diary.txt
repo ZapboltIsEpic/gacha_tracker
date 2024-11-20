@@ -1,0 +1,4 @@
+20/11/24:
+- Finally got AWS EC2 Server to load up angular app instead of "welcome to nginx" page
+- The fix was to add a nginx.conf file and instead of copying from /usr/src/app/dist /usr/share/nginx/html
+  it was /usr/src/app/dist/client/browser /usr/share/nginx/html
