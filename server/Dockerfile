@@ -24,7 +24,7 @@ COPY .env .
  
 RUN npm ci --production
  
-COPY --from=build /usr/src/app/dist /app
+COPY --from=build /usr/src/app/dist /app/dist
  
 EXPOSE 4000
-CMD [ "node", "dist/server.ts"]
+CMD [ "node", "dist/server.js"]
