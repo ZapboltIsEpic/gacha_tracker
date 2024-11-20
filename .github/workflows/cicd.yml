@@ -51,4 +51,3 @@ jobs:
           - name: Run docker container for frontend
             run: sudo docker run -d -p 4200:80 --name gacha_tracker-frontend-container zapbolt/gacha-tracker-frontend
 
-            
