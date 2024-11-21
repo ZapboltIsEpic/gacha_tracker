@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { catchError } from 'rxjs';
 import { LocalStorageService } from '../local-storage.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-signinpage',
@@ -63,26 +64,7 @@ export class SigninpageComponent {
 
   form = 'form';
 
-  constructor(private router: Router, private http: HttpClient, private localStorageService : LocalStorageService) {}
-
-  checkCredentials(email: string, password: string): void {
-    this.http.post('http://localhost:3000/api/gachatracker/gachatrackerusers/login', this.applyForm.value)
-      .pipe( 
-        catchError((error) => {
-          console.log('Error occurred during sign up:', error);
-          alert('Sign up failed');
-          throw error;
-        })
-      )
-      .subscribe((data: any) => {
-        console.log('Credentials match:', data.email);
-        // Navigate to homepage
-        alert('Login successful');
-        // set to login id later
-        this.localStorageService.setItem('loggedIn', data.email);
-        this.router.navigate(['/']);
-      });
-  }
+  constructor(private router: Router, private http: HttpClient, private apiService: ApiService, private localStorageService : LocalStorageService) {}
 
   onSubmit() {
     const email = this.applyForm.value.email ?? '';
@@ -90,19 +72,30 @@ export class SigninpageComponent {
     this.checkCredentials(email, password);
   }
 
+  checkCredentials(email: string, password: string): void {
+    this.apiService.login(this.applyForm.value).subscribe({
+      next: (data: any) => {
+        console.log('Credentials match:', data.email);
+        alert('Login successful');
+        this.localStorageService.setItem('loggedIn', data.email);
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        alert('Login failed');
+      }
+    });
+  }
+
   onSignUp() {
-    this.http.post('http://localhost:3000/api/gachatracker/gachatrackerusers/create', this.applyForm.value)
-      .pipe(
-        catchError((error) => {
-          console.log('Error occurred during sign up:', error);
-          alert('Sign up failed');
-          throw error;
-        })
-      )
-      .subscribe((data: any) => {
+    this.apiService.signUp(this.applyForm.value).subscribe({
+      next: (data: any) => {
         alert('Sign up successful');
         console.log('Sign up successful:', data);
-      });
+      },
+      error: () => {
+        alert('Sign up failed');
+      }
+    });
   }
 
   updateSignInPageStatus() {
