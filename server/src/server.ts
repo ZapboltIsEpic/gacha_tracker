@@ -21,7 +21,7 @@ export const Main = async () => {
   app.use(cors());
   app.use(express.json());
   await connectDB();
-  const port = 3000;
+  const port = process.env.SERVER_PORT || 4000;
 
   app.use(declareHandler);
   // app.use(imageHandler);

@@ -29,7 +29,7 @@ const Main = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.app.use((0, cors_1.default)());
     exports.app.use(express_1.default.json());
     yield (0, database_1.connectDB)();
-    const port = 3000;
+    const port = process.env.SERVER_PORT || 4000;
     exports.app.use(declareHandler_1.declareHandler);
     // app.use(imageHandler);
     (0, routes_1.defineRoutes)([main_1.default, users_1.UsersController, games_1.GamesController, fgo_servants_1.FGOServantsController], exports.app);
