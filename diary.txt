@@ -5,4 +5,5 @@
 
 21/11/24:
 - fixed package.json file so that server can run with node dist/server.js
-- 
+- added environments to frontend so that api calling is flexible
+- connected backend to ec2 server
