@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
       <div [id] = "gameSection">
         <span>Games</span>
         <div *ngFor="let game of games">
-          <button mat-button [class] = "gameItem" (click)="navigateToGamePage(game.name)">
+          <button mat-button [class] = "gameItem" (click)="navigateToGamePage(formatGameName(game.name))">
             <img [src]="game.image" width="24" height="24">
             <a routerLink = "/game/{{game.id}}"></a>
             {{game.name}}
@@ -44,5 +44,9 @@ export class SidebarComponent {
 
   navigateToGamePage(gameName: string) {
     this.router.navigate(['/game/' + gameName]);
+  }
+  
+  formatGameName(name: string): string {
+    return name.toLowerCase().replace(/\//g, ' ').replace(/:/g, '');
   }
 }
