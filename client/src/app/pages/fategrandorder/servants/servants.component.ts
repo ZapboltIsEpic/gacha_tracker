@@ -10,6 +10,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { ServantIcons } from '../../../shared/models/servantIcons';
 import { ServantIconsService } from '../../../services/servantIcons.service';
 import { FGOServants } from '../../../shared/models/fgoServants.model';
+import { ApiService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-servants',
@@ -104,7 +105,7 @@ export class ServantsComponent {
   // add personalised servants 
   servantIcons:ServantIcons[] = [];
   constructor(private router: Router, private dataService : DataService, private localStorageService : LocalStorageService, private cd: ChangeDetectorRef, 
-              private servantIconsService: ServantIconsService) {
+              private servantIconsService: ServantIconsService, private apiService : ApiService) {
     this.servantIcons = this.servantIconsService.getAllServantIcons();
   }
 
@@ -122,15 +123,17 @@ export class ServantsComponent {
   }
 
   getServants(): void {
-    this.dataService.getData<FGOServants[]>('http://localhost:3000/api/gachatracker/fgo/servants/get/all')
-      .subscribe((data: any) => {
+    this.apiService.getServants().subscribe({
+      next: (data: any) => {
         this.servants = data;
         this.getFilteredServants(this.searchTerm);
         this.cd.detectChanges();
         console.log('Servants:', this.servants);
-      }, (error) => {
-        console.error('Error fetching servants:', error);
-      });
+      }, 
+      error: () => {
+        console.error('Error fetching servants');
+      }
+    });
   }
 
   getFilteredServants(searchTerm: string) : void {
