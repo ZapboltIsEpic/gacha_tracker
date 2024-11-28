@@ -47,4 +47,3 @@ import { MatButtonModule } from '@angular/material/button';
       console.log(`Navigating to ${value}`);
     }
   }
-  

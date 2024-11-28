@@ -1,0 +1,14 @@
+name: testing MEAN application
+
+on:
+    push:
+        branches:
+            - workingBranch
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v4

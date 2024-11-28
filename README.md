@@ -10,7 +10,11 @@ Frontend:
 - ng serve in client folder
 
 Requirements/Checklist:
+Immediate
+- Do ZZZ page
 - add Unit tests
+
+Future
 - Finish personalised servants in fgo
 - Complete craft essences in fgo
 - Add individual gacha game website/progression

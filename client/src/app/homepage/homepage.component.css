@@ -32,3 +32,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.homepagebox {
+    display: flex;
+    flex-direction: column;
+    color: #ebebec;
+    text-decoration: none;
+}
