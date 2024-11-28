@@ -12,3 +12,9 @@ jobs:
         steps:
             - name: Checkout source
               uses: actions/checkout@v4
+            - name: npm ci
+              working-directory: server
+              run: npm ci
+            - name: Angular test in production mode
+              working-directory: server
+              run: npm run test:ci
