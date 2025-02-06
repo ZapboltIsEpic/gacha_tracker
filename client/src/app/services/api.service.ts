@@ -42,4 +42,13 @@ export class ApiService {
         console.error('API error:', error);
         return throwError(() => error);
     }
+
+    // ZZZ
+    // Agents
+    getAgents(): Observable<any> {
+        // can specify datatype instead of any
+        return this.dataService.getData<any>(`${this.domain}${this.apiString}/zzz/agents/get/all`).pipe(
+            catchError(this.handleError)
+        )
+    }
 }

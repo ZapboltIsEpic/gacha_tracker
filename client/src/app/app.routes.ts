@@ -5,6 +5,7 @@ import { FategrandorderhomepageComponent } from './pages/fategrandorder/fategran
 import { ServantsComponent } from './pages/fategrandorder/servants/servants.component';
 import { CraftEssencesComponent } from './pages/fategrandorder/craft-essences/craft-essences.component';
 import { ZenlesszonezerohomepageComponent } from './pages/zenlesszonezero/zenlesszonezerohomepage/zenlesszonezerohomepage.component';
+import { AgentsComponent } from './pages/zenlesszonezero/agents/agents.component';
 
 export const routes: Routes = [
     { path: 'signin', component: SigninpageComponent},
@@ -17,5 +18,6 @@ export const routes: Routes = [
     { path: 'game/fate grand order/craft essences', component: CraftEssencesComponent},
 
     // zenless zone zero
-    { path: 'game/zenless zone zero', component: ZenlesszonezerohomepageComponent}
+    { path: 'game/zenless zone zero', component: ZenlesszonezerohomepageComponent},
+    { path: 'game/zenless zone zero/agents', component: AgentsComponent},
 ];

@@ -4,7 +4,7 @@ This is a website to track gacha gaming progress using MEAN stack (MongoDB, Expr
 SETUP:
 Backend:
 - npx tsc in server folder
-- npx tsx src/server.ts in server folder
+- npx tsx src/server.ts OR node dist/server.js in server folder 
 
 Frontend:
 - ng serve in client folder
