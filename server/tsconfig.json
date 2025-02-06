@@ -10,6 +10,7 @@
       "strict": true,     
       "skipLibCheck": true,
       "experimentalDecorators": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "sourceMap": true
     }
 }
